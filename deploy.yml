@@ -1,0 +1,37 @@
+apiVersion: 2019-12-01
+location: eastus
+name: doc-summariser
+properties:
+  containers:
+  - name: doc-summariser-0
+    properties:
+      environmentVariables:
+        - name: 'OAI1'
+          value: 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        - name: 'OAI2'
+          value: 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        - name: 'OAI3'
+          value: 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        - name: 'OAI4'
+          value: 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        - name: 'OAI5'
+          value: 'sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+      image: timscarfe/doc-summariser:latest-amd64
+      ports:
+        - port: 5000
+      resources:
+        requests:
+          cpu: 1.0
+          memoryInGB: 1.5
+  osType: Linux
+  restartPolicy: Always
+  ipAddress:
+      dnsNameLabel: 'pdf-doc-summariser'
+      fqdn: pdf-doc-summariser.eastus.azurecontainer.io
+      ports:
+      - port: 5000
+        protocol: TCP
+      type: 'Public'
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
+ 

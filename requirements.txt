@@ -1,0 +1,5 @@
+
+# this is a python requirements.txt
+pdfminer.six
+flask
+openai 
