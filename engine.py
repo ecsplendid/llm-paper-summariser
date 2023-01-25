@@ -6,6 +6,18 @@ import openai
 import subprocess
 from multiprocessing import Pool, Process, Manager
 
+from PyPDF2 import PdfReader
+
+
+def pdf2txt(filepath):
+    with open(filepath, "rb") as file:
+        pdf = PdfReader(file)
+        text = ""
+        for page in range(len(pdf.pages)):
+            text += pdf.pages[page].extract_text()
+    return text
+
+
 rr = RoundRobin(['OAI1',
                  'OAI2',
                  'OAI3',
@@ -83,8 +95,9 @@ def process_pdf(url, html=False):
 
     # download this pdf and save it as paper.pdf
     os.system("wget " + url + " --user-agent TryToStopMeFromUsingWgetNow -O paper.pdf")
-    result = subprocess.run(['pdf2txt.py', 'paper.pdf'], stdout=subprocess.PIPE)
-    text = result.stdout.decode('utf-8')
+    # result = subprocess.run(['pdf2txt.py', 'paper.pdf'], stdout=subprocess.PIPE)
+    # text = result.stdout.decode('utf-8')
+    text = pdf2txt('paper.pdf')
 
     # chunk the text up into 1000 word chunks and store them in a list
 
