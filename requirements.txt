@@ -3,3 +3,4 @@
 pdfminer.six
 flask
 openai 
+pypdf2~=3.0.1
